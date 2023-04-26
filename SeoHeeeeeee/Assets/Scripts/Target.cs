@@ -18,6 +18,7 @@ public class Target : MonoBehaviour
     [SerializeField] private bool needDistanceText = false;
 
     public Indicator indicator;
+
     public Color TargetColor
     {
         get

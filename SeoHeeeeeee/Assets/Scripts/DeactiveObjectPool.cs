@@ -10,7 +10,7 @@ public class DeactiveObjectPool : MonoBehaviour
     [Tooltip("Initial pooled amount.")]
     public int pooledAmount = 1;
     [Tooltip("Should the pooled amount increase.")]
-    public bool willGrow = true;
+    public bool willGrow = false;
 
     [SerializeField]
     List<Indicator> pooledObjects;

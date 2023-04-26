@@ -9,7 +9,7 @@ public class OffScreenIndicator : MonoBehaviour
 {
 
     public Image arrowImage;
-    public float angleThreshold = 20f;
+    public float angleThreshold = 10f;
 
     float screenBoundOffset = 0.9f;
 
@@ -51,11 +51,6 @@ public class OffScreenIndicator : MonoBehaviour
                 indicator = GetIndicator(ref target.indicator, IndicatorType.Deactive); // Gets the box indicator from the pool.
                 indicator.SetImageColor(alpha);// Sets the image color of the indicator.
 
-                if (target == null)
-                    return;
-
-                Vector3 screenPos = mainCamera.WorldToScreenPoint(target.transform.position);
-
                 float angle = Vector3.Angle(target.transform.position - mainCamera.transform.position, mainCamera.transform.forward);
                 bool isTargetCentered = angle <= angleThreshold;
 
@@ -63,14 +58,12 @@ public class OffScreenIndicator : MonoBehaviour
 
                 if (!isTargetCentered)
                 {
-                    Vector3 cameraCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, screenPos.z);
-                    Vector3 arrowDirection = screenPos - cameraCenter;
+                    Vector3 cameraCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, screenPosition.z);
+                    Vector3 arrowDirection = screenPosition - cameraCenter;
                     float arrowAngle = Mathf.Atan2(arrowDirection.y, arrowDirection.x) * Mathf.Rad2Deg;
                     arrowImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, arrowAngle));
                     arrowImage.rectTransform.anchoredPosition = new Vector2(0, 0);
                 }
-
-
             }
             else if (target.NeedArrowIndicator && !isTargetVisible)
             {
